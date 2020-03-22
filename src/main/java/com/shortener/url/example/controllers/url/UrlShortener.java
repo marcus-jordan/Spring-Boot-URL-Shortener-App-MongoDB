@@ -1,7 +1,6 @@
 package com.shortener.url.example.controllers.url;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +14,12 @@ public class UrlShortener {
 	@Autowired
 	private UrlService urlService;
 
-    @PostMapping(value = "/shorten", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public @ResponseBody ResponseEntity<String> shortenUrl(Map<String, String> urlMapping) {
+    @PostMapping("/shorten")
+	public @ResponseBody ResponseEntity<String> shortenUrl(@RequestBody Map<String, String> urlMapping) {
 		try {
 			urlService.createUrl(urlMapping.get("key"), urlMapping.get("url"));
 			return new ResponseEntity(HttpStatus.OK);
-		} catch (Exception exception){
+		} catch (Exception exception) {
 			return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

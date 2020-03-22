@@ -2,10 +2,7 @@ package com.shortener.url.example;
 
 import com.shortener.url.example.repositories.UrlMappingRepository;
 import com.shortener.url.example.services.UrlService;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -65,11 +62,17 @@ class TestUrlShortenerEndpoints {
         HttpURLConnection connection = (HttpURLConnection) (new URL(url)).openConnection();
         connection.setRequestMethod(RequestMethod.POST.toString());
         connection.setDoOutput(true);
+        connection.setRequestProperty("Content-Type", "application/json");
 
         OutputStream outputStream = connection.getOutputStream();
-        outputStream.write(json.getBytes("utf-8"));
+        outputStream.write(json.getBytes());
         outputStream.flush();
 
         Assertions.assertEquals(HttpStatus.OK.value(), connection.getResponseCode());
+        outputStream.close();
+    }
+    @AfterAll
+    public void teardown() {
+        urlMappingRepository.deleteAll();
     }
 }
