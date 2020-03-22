@@ -18,4 +18,7 @@ public class UrlService {
     public String getUrlByKey(String key) {
         return urlMappingRepository.findById(key).orElseThrow(NullPointerException::new).getUrl();
     }
+    public boolean keyExists(String key) {
+        return urlMappingRepository.existsById(key);
+    }
 }
