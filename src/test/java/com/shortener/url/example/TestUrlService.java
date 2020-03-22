@@ -14,25 +14,15 @@ import com.shortener.url.example.services.UrlService;
 @ExtendWith(SpringExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ActiveProfiles(profiles = {"test"})
-class UrlShortenerTests {
+class TestUrlService {
 
 	private UrlMappingRepository urlMappingRepository;
 	private UrlService urlService;
 
 	@Autowired
-	UrlShortenerTests(UrlMappingRepository urlMappingRepository, UrlService urlService) {
+	TestUrlService(UrlMappingRepository urlMappingRepository, UrlService urlService) {
 		this.urlMappingRepository = urlMappingRepository;
 		this.urlService = urlService;
-	}
-
-	@BeforeAll
-	public void setup() throws Exception {
-		urlService.createUrl("jsu", "jacksonstateuniversity.edu");
-		urlService.createUrl("umd", "universityofmaryland.edu");
-		Assertions.assertAll(
-				() -> Assertions.assertTrue(urlMappingRepository.existsById("jsu")),
-				() -> Assertions.assertTrue(urlMappingRepository.existsById("umd"))
-		);
 	}
 	@Test
 	void testCreateMapping() {
