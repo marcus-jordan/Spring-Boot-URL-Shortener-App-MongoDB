@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.shortener.url.example.repositories.UrlMappingRepository;
 import com.shortener.url.example.model.UrlMapping;
 
+import java.util.Optional;
+
 @Service
 public class UrlService {
     @Autowired
@@ -12,5 +14,8 @@ public class UrlService {
 
     public void createUrl(String key, String url) {
         urlMappingRepository.insert(new UrlMapping(key, url));
+    }
+    public String getUrlByKey(String key) {
+        return urlMappingRepository.findById(key).orElseThrow(NullPointerException::new).getUrl();
     }
 }

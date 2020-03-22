@@ -50,7 +50,16 @@ class UrlShortenerTests {
 		urlMappingRepository.deleteById("map");
 		Assertions.assertFalse(urlMappingRepository.existsById("map"));
 	}
-	@AfterEach
+	@Test
+	void testGetUrl() {
+		urlService.createUrl("key", "value");
+		Assertions.assertEquals(urlService.getUrlByKey("key"), "value");
+	}
+	@Test
+	void testGetInvalidUrl() {
+		Assertions.assertThrows(NullPointerException.class, () -> urlService.getUrlByKey("invalidKey"));
+	}
+	@AfterAll
 	void teardown() {
 		urlMappingRepository.deleteAll();
 	}
