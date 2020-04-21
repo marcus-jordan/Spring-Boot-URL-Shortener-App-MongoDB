@@ -1,0 +1,16 @@
+<div class="mx-auto" style="width: 400px;">
+  <div class="input-group input-group-lg">
+    <form class="container" [formGroup]="urlShortenerForm">
+      <div class="form-group">
+        <label>Url</label>
+        <input type="url" class="form-control" [(ngModel)]="url" formControlName="url">
+      </div>
+      <div class="form-group">
+        <label>Alias</label>
+        <input type="text" class="form-control" [(ngModel)]="alias" formControlName="shortenedUrl">
+      </div>
+      <button type="submit" class="btn btn-primary bg-dark"
+              (click)="onSubmit()" [disabled]="!urlShortenerForm.valid"> Shorten Url </button>
+    </form>
+  </div>
+</div>

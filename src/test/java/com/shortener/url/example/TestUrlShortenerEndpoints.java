@@ -45,7 +45,7 @@ class TestUrlShortenerEndpoints {
                 () -> Assertions.assertTrue(urlMappingRepository.existsById("umd"))
         );
     }
-    @Test
+    /*@Test
     public void testRouteUrl() throws IOException {
 
         String url = "http://localhost:" + port + "/jsu";
@@ -53,7 +53,7 @@ class TestUrlShortenerEndpoints {
         connection.setRequestMethod(RequestMethod.GET.toString());
         Assertions.assertEquals(HttpStatus.OK.value(), connection.getResponseCode());
 
-    }
+    }*/
     @Test
     public void testCreateUrl() throws IOException {
 

@@ -7,7 +7,6 @@ import org.springframework.data.annotation.Id;
 public class UrlMapping {
     @Id
     private String key;
-
     private String url;
 
     public UrlMapping(String key, String url) {
